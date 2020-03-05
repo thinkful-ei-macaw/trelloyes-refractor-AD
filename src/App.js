@@ -83,18 +83,26 @@ class App extends Component {
     });
   }
   
-  handleDelete = (id) => {
-    console.log('delete clicked', id)
+  handleDelete = (obj, keyToOmit) => {
+    console.log('delete clicked')
+    
+     function omit(obj, keyToOmit) {
+      console.log('omit ran', obj)
+      console.log(keyToOmit)
+      return Object.entries(obj).reduce(
+        (newObj, [key, value]) =>
+            key === keyToOmit ? newObj : {...newObj, [key]: value},
+          {}
+        );
+      }
+      const newAllCards = omit(obj, keyToOmit);
+      console.log(newAllCards)
+      // this.setState(
+      //   {allCards: newAllCards}
+      // )
   }
 
-  // omit(obj, keyToOmit) {
-  //   console.log('omit ran')
-  //   return Object.entries(obj).reduce(
-  //     (newObj, [key, value]) =>
-  //         key === keyToOmit ? newObj : {...newObj, [key]: value},
-  //     {}
-  //   );
-  // }
+
 
   render() {
     return (
@@ -108,6 +116,7 @@ class App extends Component {
               id={list.id}
               key={list.id}
               header={list.header}
+              allCards={this.state.allCards}
               cards={list.cardIds.map(id => this.state.allCards[id])}
               onDelete={this.handleDelete}
               onAdd={this.handleCreateRandom}
