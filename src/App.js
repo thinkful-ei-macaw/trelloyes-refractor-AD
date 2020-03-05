@@ -84,27 +84,32 @@ class App extends Component {
   }
   
   handleDelete = (obj, keyToOmit) => {
-    console.log('delete clicked')
     
-     function omit(obj, keyToOmit) {
-      console.log('omit ran', obj)
-      console.log(keyToOmit)
+    function omit(obj, keyToOmit) {
       return Object.entries(obj).reduce(
         (newObj, [key, value]) =>
             key === keyToOmit ? newObj : {...newObj, [key]: value},
-          {}
-        );
-      }
+        {}
+      );
+    }
+
       const newAllCards = omit(obj, keyToOmit);
-      console.log(newAllCards)
-      // this.setState(
-      //   {allCards: newAllCards}
-      // )
+      this.setState({
+        lists: this.state.lists.map((list) => {
+          let newCardIds = list.cardIds.filter(id => id !== keyToOmit)
+          return {
+            id: list.id,
+            header: list.header,
+            cardIds: newCardIds
+          }}),
+        allCards: newAllCards
+      })
   }
 
 
 
   render() {
+    console.log(this.state.lists)
     return (
       <main className='App'>
         <header className='App-header'>
