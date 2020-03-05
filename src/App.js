@@ -63,15 +63,24 @@ class App extends Component {
         content: 'lorem ipsum',
       }
     }
-    // this.setState({
-    //   lists: this.state.lists.map((id) => {
-    //     if (listId === this.id) {
-    //       return this.setState({
-    //         cardIds: [...this.state.lists[id - 1].cardIds, newRandomCard.id]
-    //       })
-    //     }        
-    //   })
-    // })
+    let newCard = newRandomCard()
+    let allCards = this.state.allCards
+    allCards[newCard.id] = newCard
+    this.setState(
+      {
+      lists: this.state.lists.map((list) => {
+        if (listId === list.id) {
+          return { 
+            id: list.id,
+            header: list.header,
+            cardIds: [...list.cardIds, newCard.id]
+          }
+        } else {
+          return list;
+        }
+      }),
+    allCards
+    });
   }
   
   handleDelete = (id) => {
