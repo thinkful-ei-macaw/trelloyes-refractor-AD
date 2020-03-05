@@ -53,7 +53,6 @@ class App extends Component {
   }
 
   handleCreateRandom = (listId) => {
-    console.log('create random clicked', listId)
     const newRandomCard = () => {
       const id = Math.random().toString(36).substring(2, 4)
         + Math.random().toString(36).substring(2, 4);
@@ -109,7 +108,6 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state.lists)
     return (
       <main className='App'>
         <header className='App-header'>
