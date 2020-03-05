@@ -63,8 +63,7 @@ class App extends Component {
       }
     }
     let newCard = newRandomCard()
-    let allCards = this.state.allCards
-    allCards[newCard.id] = newCard
+
     this.setState(
       {
       lists: this.state.lists.map((list) => {
@@ -78,7 +77,10 @@ class App extends Component {
           return list;
         }
       }),
-    allCards
+    allCards: {
+      ...this.state.allCards,
+      [newCard.id]: newCard
+    }
     });
   }
   
